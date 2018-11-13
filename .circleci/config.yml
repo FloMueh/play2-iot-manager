@@ -16,7 +16,7 @@ jobs:
       DATABASE_USER: user
       DATABASE_PASSWORD: password
     steps:
-    - ## do a checkout here
+    - checkout
     - run:
         name: "test with sbt"
         command: |
@@ -29,7 +29,7 @@ jobs:
                        done
                        echo Failed waiting for Postgres && exit 1
            )
-           ## run your test with sbt ciTest
+    - run: sbt test
   build:
     docker:
     - image: innfactory/gcloud-scala-ci:latest
@@ -46,9 +46,7 @@ jobs:
       DATABASE_USER: user
       DATABASE_PASSWORD: password
     steps:
-    - ## checkout
-    - ## setup a remote docker env with version: 17.09.0-ce
-    - ## build your app with sbt flyway/flywayMigrate and sbt -Dbranch=$CIRCLE_BRANCH -Dversion=$CIRCLE_SHA1 docker:publish
+    - checkout
   deploy:
 workflows:
   version: 2
