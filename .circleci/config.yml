@@ -17,7 +17,7 @@ jobs:
       DATABASE_USER: user
       DATABASE_PASSWORD: password
     steps:
-    - ## do a checkout here
+    - run: echo checkin
     - run:
         name: "test with sbt"
         command: |
